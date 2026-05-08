@@ -1,0 +1,10 @@
+boto3
+pinecone-client
+requests
+PyPDF2
+pydantic
+fastapi
+uvicorn
+python-multipart
+python-dotenv
+langchain-text-splitters

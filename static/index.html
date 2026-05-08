@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serverless RAG Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-mesh"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-bolt-lightning"></i>
+                <h1>Serverless RAG</h1>
+            </div>
+            <p>Upload PDFs and query your documents in real time!!.</p>
+        </header>
+
+        <main>
+            <div class="panel upload-panel glass">
+                <h2><i class="fa-solid fa-cloud-arrow-up"></i> Upload Document</h2>
+                <div class="upload-area" id="drop-zone">
+                    <i class="fa-regular fa-file-pdf"></i>
+                    <p>Drag & drop your PDF here</p>
+                    <p class="small">or</p>
+                    <label for="file-upload" class="btn-primary">Browse Files</label>
+                    <input type="file" id="file-upload" accept=".pdf" hidden>
+                </div>
+                <div id="upload-status" class="status-msg"></div>
+            </div>
+
+            <div class="panel chat-panel glass">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="margin-bottom: 0;"><i class="fa-solid fa-comment-dots"></i> Query Knowledge Base</h2>
+                    <button id="refresh-chat-btn" class="btn-primary"
+                        style="padding: 0.4rem 0.8rem; font-size: 0.85rem; background: rgba(255,255,255,0.1); border: 1px solid var(--surface-border);">
+                        <i class="fa-solid fa-arrows-rotate"></i> Refresh Context
+                    </button>
+                </div>
+
+                <div class="chat-container" id="chat-box">
+                    <div class="message ai-message">
+                        <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                        <div class="content">Hello! Upload a PDF to the left, and then ask me any questions about the
+                            contents. I'll search through Pinecone and generate an answer using Ollama.</div>
+                    </div>
+                </div>
+
+                <form id="chat-form" class="input-area">
+                    <input type="text" id="query-input" placeholder="Ask a question about your documents..." required
+                        autocomplete="off">
+                    <button type="submit" class="send-btn" id="send-btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
