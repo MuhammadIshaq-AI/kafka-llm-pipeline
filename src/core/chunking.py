@@ -1,15 +1,14 @@
 import io
-import pdfplumber
+from PyPDF2 import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def extract_text_from_pdf(pdf_bytes: bytes) -> str:
-    """Extract text from PDF bytes using pdfplumber."""
+    """Extract text from PDF bytes."""
+    reader = PdfReader(io.BytesIO(pdf_bytes))
     text = ""
-    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
-        for page in pdf.pages:
-            page_text = page.extract_text()
-            if page_text:
-                text += page_text + "\n"
+    for page in reader.pages:
+        if page_text := page.extract_text():
+            text += page_text + "\n"
     return text
 
 def chunk_text(text: str, chunk_size: int = 1000, overlap: int = 200) -> list[str]:
